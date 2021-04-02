@@ -9,16 +9,16 @@
     "node": ">=8.9.0"
   },
   "dependencies": {
-    "@tensorflow-models/face-landmarks-detection": "0.0.1",
-    "@tensorflow/tfjs-backend-wasm": "2.8.4",
-    "@tensorflow/tfjs-backend-webgl": "2.8.4",
-    "@tensorflow/tfjs-backend-cpu": "2.8.4",
-    "@tensorflow/tfjs-converter": "2.8.4",
-    "@tensorflow/tfjs-core": "2.8.4",
+    "@tensorflow-models/face-landmarks-detection": "file:../dist",
+    "@tensorflow/tfjs-backend-wasm": "^3.1.0",
+    "@tensorflow/tfjs-backend-webgl": "^3.1.0",
+    "@tensorflow/tfjs-backend-cpu": "^3.1.0",
+    "@tensorflow/tfjs-converter": "^3.1.0",
+    "@tensorflow/tfjs-core": "^3.1.0",
     "stats.js": "^0.17.0"
   },
   "scripts": {
-    "watch": "cross-env NODE_ENV=development parcel index.html --no-hmr --target browser",
+    "watch": "cross-env NODE_ENV=development parcel index.html --no-hmr --target browser --open",
     "build": "cross-env NODE_ENV=production parcel build index.html --target browser --public-url ./",
     "lint": "eslint .",
     "link-local": "yalc link @tensorflow-models/face-landmarks-detection"
@@ -36,8 +36,11 @@
     "cross-env": "^5.2.0",
     "eslint": "^4.19.1",
     "eslint-config-google": "^0.9.1",
-    "parcel-bundler": "^1.12.4",
-    "yalc": "~1.0.0-pre.27"
+    "parcel-bundler": "^1.12.5",
+    "yalc": "~1.0.0-pre.50"
+  },
+  "resolutions": {
+    "is-svg": "4.3.1"
   },
   "eslintConfig": {
     "extends": "google",
