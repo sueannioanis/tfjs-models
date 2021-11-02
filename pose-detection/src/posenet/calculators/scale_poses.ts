@@ -15,7 +15,7 @@
  * =============================================================================
  */
 
-import {ImageSize, Padding} from '../../calculators/interfaces/common_interfaces';
+import {ImageSize, Padding} from '../../shared/calculators/interfaces/common_interfaces';
 import {InputResolution, Pose} from '../../types';
 
 export function scalePoses(
@@ -34,10 +34,12 @@ export function scalePoses(
     return poses;
   }
 
-  poses.forEach(pose => pose.keypoints.forEach(kp => {
-    kp.x = (kp.x + offsetX) * scaleX;
-    kp.y = (kp.y + offsetY) * scaleY;
-  }));
+  for (const pose of poses) {
+    for (const kp of pose.keypoints) {
+      kp.x = (kp.x + offsetX) * scaleX;
+      kp.y = (kp.y + offsetY) * scaleY;
+    }
+  }
 
   return poses;
 }

@@ -15,7 +15,7 @@
  * =============================================================================
  */
 
-import {PoseNetEstimationConfig, PosenetModelConfig, PoseNetOutputStride} from './types';
+import {PoseNetEstimationConfig, PosenetModelConfig, PoseNetOutputStride, StringTuple} from './types';
 
 // The default configuration for loading MobileNetV1 based PoseNet.
 //
@@ -61,3 +61,27 @@ export const MULTI_PERSON_ESTIMATION_CONFIG: PoseNetEstimationConfig = {
 };
 
 export const RESNET_MEAN = [-123.15, -115.90, -103.06];
+
+// A point (y, x) is considered as root part candidate if its score is a
+// maximum in a window |y - y'| <= kLocalMaximumRadius, |x - x'| <=
+// kLocalMaximumRadius.
+export const K_LOCAL_MAXIMUM_RADIUS = 1;
+
+export const NUM_KEYPOINTS = 17;
+
+/*
+ * Define the skeleton. This defines the parent->child relationships of our
+ * tree. Arbitrarily this defines the nose as the root of the tree, however
+ * since we will infer the displacement for both parent->child and
+ * child->parent, we can define the tree root as any node.
+ */
+export const POSE_CHAIN: StringTuple[] = [
+  ['nose', 'left_eye'], ['left_eye', 'left_ear'], ['nose', 'right_eye'],
+  ['right_eye', 'right_ear'], ['nose', 'left_shoulder'],
+  ['left_shoulder', 'left_elbow'], ['left_elbow', 'left_wrist'],
+  ['left_shoulder', 'left_hip'], ['left_hip', 'left_knee'],
+  ['left_knee', 'left_ankle'], ['nose', 'right_shoulder'],
+  ['right_shoulder', 'right_elbow'], ['right_elbow', 'right_wrist'],
+  ['right_shoulder', 'right_hip'], ['right_hip', 'right_knee'],
+  ['right_knee', 'right_ankle']
+];

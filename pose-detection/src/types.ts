@@ -14,27 +14,23 @@
  * limitations under the License.
  * =============================================================================
  */
-import * as tf from '@tensorflow/tfjs-core';
+import {DetectorInput, Keypoint} from './shared/calculators/interfaces/common_interfaces';
+import {BoundingBox} from './shared/calculators/interfaces/shape_interfaces';
+
+export {Keypoint};
 
 export enum SupportedModels {
-  PoseNet = 'PoseNet',
-  MediapipeBlazepose = 'MediapipeBlazepose'
+  MoveNet = 'MoveNet',
+  BlazePose = 'BlazePose',
+  PoseNet = 'PoseNet'
 }
 
 export type QuantBytes = 1|2|4;
 
 /**
  * Common config to create the pose detector.
- *
- * `quantBytes`: Optional. Options: 1, 2, or 4.  This parameter affects weight
- * quantization in the models. The available options are
- * 1 byte, 2 bytes, and 4 bytes. The higher the value, the larger the model size
- * and thus the longer the loading time, the lower the value, the shorter the
- * loading time but lower the accuracy.
  */
-export interface ModelConfig {
-  quantBytes?: QuantBytes;
-}
+export interface ModelConfig {}
 
 /**
  * Common config for the `estimatePoses` method.
@@ -56,26 +52,17 @@ export interface EstimationConfig {
 /**
  * Allowed input format for the `estimatePoses` method.
  */
-export type PoseDetectorInput =
-    tf.Tensor3D|ImageData|HTMLVideoElement|HTMLImageElement|HTMLCanvasElement;
+export type PoseDetectorInput = DetectorInput;
 
 export interface InputResolution {
   width: number;
   height: number;
 }
 
-/**
- * A keypoint that contains coordinate information.
- */
-export interface Keypoint {
-  x: number;
-  y: number;
-  z?: number;
-  score?: number;  // The probability of a keypoint's visibility.
-  name?: string;
-}
-
 export interface Pose {
   keypoints: Keypoint[];
-  score?: number;  // The probability of an actual pose.
+  score?: number;            // The probability of an actual pose.
+  keypoints3D?: Keypoint[];  // Keypoints in meters in a 1m * 1m * 1m space.
+  box?: BoundingBox;         // A bounding box around the detected person.
+  id?: number;               // The unique identifier for this (tracked) pose.
 }

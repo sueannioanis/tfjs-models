@@ -14,27 +14,54 @@
  * limitations under the License.
  * =============================================================================
  */
+// Don't change the order. The order needs to be consistent with the model
+// keypoint result list.
 export const COCO_KEYPOINTS = [
-  'nose', 'leftEye', 'rightEye', 'leftEar', 'rightEar', 'leftShoulder',
-  'rightShoulder', 'leftElbow', 'rightElbow', 'leftWrist', 'rightWrist',
-  'leftHip', 'rightHip', 'leftKnee', 'rightKnee', 'leftAnkle', 'rightAnkle'
+  'nose', 'left_eye', 'right_eye', 'left_ear', 'right_ear', 'left_shoulder',
+  'right_shoulder', 'left_elbow', 'right_elbow', 'left_wrist', 'right_wrist',
+  'left_hip', 'right_hip', 'left_knee', 'right_knee', 'left_ankle',
+  'right_ankle'
 ];
-export const BLAZEPOSE_KEYPOINTS_UPPERBODY = [
-  'nose',         'rightEyeInner', 'rightEye',     'rightEyeOuter',
-  'leftEyeInner', 'leftEye',       'leftEyeOuter', 'rightEar',
-  'leftEar',      'mouthRight',    'mouthLeft',    'rightShoulder',
-  'leftShoulder', 'rightElbow',    'leftElbow',    'rightWrist',
-  'leftWrist',    'rightPinky',    'leftPinky',    'rightIndex',
-  'leftIndex',    'rightThumb',    'leftThumb',    'rightHip',
-  'leftHip'
-];
-export const BLAZEPOSE_KEYPOINTS_FULLBODY = [
-  ...BLAZEPOSE_KEYPOINTS_UPPERBODY, 'rightKnee', 'leftKnee', 'rightAnkle',
-  'leftAnkle', 'rightHeel', 'leftHeel', 'rightFoot', 'leftFoot'
+// Don't change the order. The order needs to be consistent with the model
+// keypoint result list.
+export const BLAZEPOSE_KEYPOINTS = [
+  'nose',
+  'left_eye_inner',
+  'left_eye',
+  'left_eye_outer',
+  'right_eye_inner',
+  'right_eye',
+  'right_eye_outer',
+  'left_ear',
+  'right_ear',
+  'mouth_left',
+  'mouth_right',
+  'left_shoulder',
+  'right_shoulder',
+  'left_elbow',
+  'right_elbow',
+  'left_wrist',
+  'right_wrist',
+  'left_pinky',
+  'right_pinky',
+  'left_index',
+  'right_index',
+  'left_thumb',
+  'right_thumb',
+  'left_hip',
+  'right_hip',
+  'left_knee',
+  'right_knee',
+  'left_ankle',
+  'right_ankle',
+  'left_heel',
+  'right_heel',
+  'left_foot_index',
+  'right_foot_index'
 ];
 export const BLAZEPOSE_KEYPOINTS_BY_SIDE = {
-  left: [4, 5, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32],
-  right: [1, 2, 3, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31],
+  left: [1, 2, 3, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31],
+  right: [4, 5, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32],
   middle: [0]
 };
 export const COCO_KEYPOINTS_BY_SIDE = {
@@ -47,9 +74,10 @@ export const COCO_CONNECTED_KEYPOINTS_PAIRS = [
   [7, 9], [8, 10], [11, 12], [11, 13], [12, 14], [13, 15], [14, 16]
 ];
 export const BLAZEPOSE_CONNECTED_KEYPOINTS_PAIRS = [
-  [0, 1],   [0, 4],   [1, 2],   [2, 3],   [3, 7],   [4, 5],   [5, 6],
-  [6, 8],   [9, 10],  [11, 12], [11, 13], [11, 23], [12, 14], [14, 16],
-  [12, 24], [13, 15], [15, 17], [16, 18], [15, 21], [16, 22], [17, 19],
-  [18, 20], [23, 25], [23, 24], [24, 26], [25, 27], [26, 28], [27, 29],
-  [28, 30], [27, 31], [28, 32], [29, 31], [30, 32]
+  [0, 1],   [0, 4],   [1, 2],   [2, 3],   [3, 7],   [4, 5],
+  [5, 6],   [6, 8],   [9, 10],  [11, 12], [11, 13], [11, 23],
+  [12, 14], [14, 16], [12, 24], [13, 15], [15, 17], [16, 18],
+  [16, 20], [15, 17], [15, 19], [15, 21], [16, 22], [17, 19],
+  [18, 20], [23, 25], [23, 24], [24, 26], [25, 27], [26, 28],
+  [27, 29], [28, 30], [27, 31], [28, 32], [29, 31], [30, 32]
 ];

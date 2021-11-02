@@ -1,3 +1,6 @@
+import {Keypoint} from '../../shared/calculators/interfaces/common_interfaces';
+import {BoundingBox} from '../../shared/calculators/interfaces/shape_interfaces';
+
 /**
  * @license
  * Copyright 2021 Google LLC. All Rights Reserved.
@@ -14,24 +17,12 @@
  * limitations under the License.
  * =============================================================================
  */
-export interface ImageSize {
-  height: number;
-  width: number;
-}
 
-export interface Padding {
-  top: number;
-  bottom: number;
-  left: number;
-  right: number;
-}
-
-export type ValueTransform = {
-  scale: number,
-  offset: number
-};
-
-export interface WindowElement {
-  distance: number;
-  duration: number;
+export interface Track {
+  id: number;              // A unique identifier for each tracked person.
+  lastTimestamp: number;   // The last timestamp (in milliseconds) in which a
+                           // detection was linked with the track.
+  keypoints?: Keypoint[];  // Keypoints associated with the tracked person.
+  box?: BoundingBox;       // Bounding box associated with the tracked person.
+  score?: number;          // A confidence value of the track.
 }
