@@ -3,6 +3,13 @@
 MediaPipeHands-MediaPipe wraps the MediaPipe JS Solution within the familiar
 TFJS API [mediapipe.dev](https://mediapipe.dev).
 
+Two models are offered.
+
+* lite - our smallest model that is less accurate but smaller in model size and minimal memory footprint.
+* full - A middle ground between performance and accuracy.
+
+Please try our our live [demo](https://storage.googleapis.com/tfjs-models/demos/hand-pose-detection/index.html?model=mediapipe_hands).
+
 --------------------------------------------------------------------------------
 
 ## Table of Contents
@@ -18,14 +25,21 @@ To use MediaPipeHands:
 Via script tags:
 
 ```html
+<!-- Require the peer dependencies of hand-pose-detection. -->
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
+
+<!-- You must explicitly require a TF.js backend if you're not using the TF.js union bundle. -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/hand-pose-detection"></script>
 ```
 
 Via npm:
 ```sh
-yarn add @tensorflow-models/hand-pose-detection
 yarn add @mediapipe/hands
+yarn add @tensorflow/tfjs-core, @tensorflow/tfjs-backend-webgl
+yarn add @tensorflow-models/hand-pose-detection
 ```
 
 -----------------------------------------------------------------------
@@ -37,6 +51,9 @@ If you are using the hand-pose-detection API via npm, you need to import the lib
 
 ```javascript
 import * as handPoseDetection from '@tensorflow-models/hand-pose-detection';
+import '@tensorflow/tfjs-core';
+// Register WebGL backend.
+import '@tensorflow/tfjs-backend-webgl';
 import '@mediapipe/hands';
 ```
 
@@ -50,7 +67,7 @@ Pass in `handPoseDetection.SupportedModels.MediaPipeHands` from the
 
 *   *runtime*: Must set to be 'mediapipe'.
 
-*   *maxHands*: Defaults to 2. The maximum number of hands that will be detected by the model. The number of returned hands can be less than the maximum (for example when no hands are present in the input).
+*   *maxHands*: Defaults to 2. The maximum number of hands that will be detected by the model. The number of returned hands can be less than the maximum (for example when no hands are present in the input). It is highly recommended to set this value to the expected max number of hands, otherwise the model will continue to search for the missing hands which can slow down the performance.
 
 *   *modelType*: specify which variant to load from `MediaPipeHandsModelType` (i.e.,
     'lite', 'full'). If unset, the default is 'full'.
@@ -61,7 +78,8 @@ Pass in `handPoseDetection.SupportedModels.MediaPipeHands` from the
 const model = handPoseDetection.SupportedModels.MediaPipeHands;
 const detectorConfig = {
   runtime: 'mediapipe',
-  solutionPath: 'base/node_modules/@mediapipe/hands'
+  solutionPath: 'https://cdn.jsdelivr.net/npm/@mediapipe/hands'
+                // or 'base/node_modules/@mediapipe/hands' in npm.
 };
 detector = await handPoseDetection.createDetector(model, detectorConfig);
 ```
